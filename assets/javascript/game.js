@@ -18,7 +18,7 @@ var wrongGuesses = [];
 
 // Counters
 var wins = 0;
-var loses = 0;
+var losses = 0;
 var guesses = 9;
 
 // Game Functions
@@ -35,8 +35,62 @@ function startGame() {
   letterSpots = [];
   wrongGuesses = [];
 
-  for (var i = 0; i < blankLetters; i++){
-      letterSpots.push("_");
+  for (var i = 0; i < blankLetters; i++) {
+    letterSpots.push("_");
   }
   console.log(letterSpots);
+
+  document.getElementById("guesses-left").innerHTML = guesses;
+  document.getElementById("suit-to-guess").innerHTML = blankLetters;
+  document.getElementById("wrong-guesses").innerHTML = wrongGuesses;
+}
+
+// Letter Input
+function checkLetter(letter) {
+  var letterWord = false;
+
+  for (var i = 0; i < blankLetters; i++) {
+    if (guessedWord[1] === letter) {
+      letterWord = true;
+    }
+  }
+
+  if (letterWord) {
+    for (var j = 0; j < blankLetters; j++) {
+      if (guessedWord[j] === letter) {
+        letterSpots[j] = letter;
+      }
+    }
+    console.log(letterSpots);
+  }
+  else {
+      wrongGuesses.push(letter);
+      guesses--;
+  }
+}
+
+function newRound() {
+    console.log("Wins: " + wins);
+    console.log("Loss: " + losses);
+    console.log("Guesses: " + wrongGuesses);
+
+    document.getElementById("guesses-left").innerHTML = guesses;
+    document.getElementById("suit-to-guess").innerHTML = letterSpots.join(" ");
+    document.getElementById("wrong-guesses").innerHTML = wrongGuesses.join(" ");
+
+    if (lettersInGuessWord.toString() === letterSpots.toString()) {
+        wins++;
+        alert("You Win!");
+
+        document.getElementById("win-count").innerHTML = wins;
+        startGame();
+    }
+
+    else if (guesses === 0) {
+        losses++;
+        alert("You lose");
+
+        document.getElementById("lose-count").innerHTML = losses;
+        startGame()
+    }
 }
