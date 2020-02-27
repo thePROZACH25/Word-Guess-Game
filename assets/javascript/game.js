@@ -1,15 +1,15 @@
 // // Funny confirm intro
 
-// var game = confirm("Do you want to play a game!");
-// if (game) {
-//   alert("Get Ready To Lose!");
-// } else {
-//   alert("TO LATE TO TURN BACK NOW!!!");
-// }
+var game = confirm("Do you want to play a game!");
+if (game) {
+  alert("Get Ready To Lose!");
+} else {
+  alert("TO LATE TO TURN BACK NOW!!!");
+}
 
 // Starting Game Var
 // ===========================================================================
-var gundamNames = ["freedom", "zaku", "wing zero", "astray", "sazabi", "gm"];
+var gundamNames = ["freedom", "zaku", "wing zero", "astray", "sazabi", "gm", "full armor", "tallgeese"];
 var guessedWord = "";
 var lettersInGuessWord = [];
 var blankLetters = 0;
@@ -40,9 +40,9 @@ function startGame() {
   }
   console.log(letterSpots);
 
-  document.querySelector(".guesses-left").innerContent = guesses;
-  document.querySelector(".suit-to-guess").innerContent = letterSpots.join(" ");
-  document.querySelector(".wrong-guesses").innerContent = wrongGuesses.join(" ");
+  document.querySelector(".guesses-left").textContent = guesses;
+  document.querySelector(".suit-to-guess").textContent = letterSpots.join(" ");
+  document.querySelector(".wrong-guesses").textContent = wrongGuesses.join(" ");
 }
 
 // Letter Input
@@ -73,15 +73,15 @@ function newRound() {
   console.log("Loss: " + losses);
   console.log("Guesses: " + wrongGuesses);
 
-  document.querySelector(".guesses-left").innerContent = guesses;
-  document.querySelector(".suit-to-guess").innerContent = letterSpots.join(" ");
-  document.querySelector(".wrong-guesses").innerContent = wrongGuesses.join(" ");
+  document.querySelector(".guesses-left").textContent = guesses;
+  document.querySelector(".suit-to-guess").textContent = letterSpots.join(" ");
+  document.querySelector(".wrong-guesses").textContent = wrongGuesses.join(" ");
 
   if (lettersInGuessWord.toString() === letterSpots.toString()) {
     wins++;
     alert("You Win!");
 
-    document.querySelector(".win-count").innerContent = wins;
+    document.querySelector(".win-count").textContent = wins;
     startGame();
   } else if (guesses === 0) {
     losses++;
